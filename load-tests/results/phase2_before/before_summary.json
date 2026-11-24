@@ -1,0 +1,122 @@
+{
+  "run_mode": "before",
+  "recorded_at_local": "2026-11-24T13:24:00+07:00",
+  "kaggle_notebook": "https://www.kaggle.com/code/cphtcao/notebookbfe4d2548e/edit",
+  "environment": {
+    "cpu_model": "Intel(R) Xeon(R) CPU @ 2.20GHz",
+    "cpu_logical": 4,
+    "java": "Amazon Corretto 21.0.13.1 LTS",
+    "jvm_opts": "-Xms256m -Xmx1024m -Duser.timezone=UTC",
+    "postgresql": "16.15 (Ubuntu 16.15-0ubuntu0.24.04.1)",
+    "locust": "2.47.0",
+    "psutil": "5.9.5",
+    "redis_enabled": false
+  },
+  "provenance": {
+    "app_branch": "phase1-baseline",
+    "app_commit": "fd6b5f3026412d2359d70bfad681fc0773c8bcae",
+    "jar_sha256": "04ac2e7980e7177c20aa130d6e71a02b209ec47a7ebe348483d08eac5f66fcdf",
+    "scripts_branch": "feat/phat-loadtest",
+    "dataset": "load-tests/datasets/phase2_seed_10k.sql (10,000 trips, 50 locations, 200 routes, 1,000 users, 5,000 bookings)"
+  },
+  "scenarios": [
+    {
+      "scenario": "phase1_orig_get_u20",
+      "users": 20,
+      "seconds": 60,
+      "requests": 523,
+      "failures": 0,
+      "error_pct": 0.0,
+      "rps": 8.74,
+      "avg_ms": 1798.72,
+      "p50_ms": 2000.0,
+      "p95_ms": 3400.0,
+      "p99_ms": 4600.0,
+      "java_cpu_avg_pct": 286.57,
+      "java_rss_max_mib": 1355.46
+    },
+    {
+      "scenario": "phase1_orig_post_u20",
+      "users": 20,
+      "seconds": 60,
+      "requests": 2760,
+      "failures": 0,
+      "error_pct": 0.0,
+      "rps": 46.73,
+      "avg_ms": 19.44,
+      "p50_ms": 16.0,
+      "p95_ms": 31.0,
+      "p99_ms": 53.0,
+      "java_cpu_avg_pct": 91.25,
+      "java_rss_max_mib": 1003.01,
+      "db_check": {
+        "negative_seat_trips": 0,
+        "seat_balance_mismatches": 0,
+        "total_bookings": 7787
+      }
+    },
+    {
+      "scenario": "phase2_s1_read_heavy_before",
+      "users": 150,
+      "seconds": 60,
+      "requests": 27853,
+      "failures": 0,
+      "error_pct": 0.0,
+      "rps": 469.88,
+      "avg_ms": 88.21,
+      "p50_ms": 72.0,
+      "p95_ms": 190.0,
+      "p99_ms": 240.0,
+      "java_cpu_avg_pct": 124.6,
+      "java_rss_max_mib": 787.77
+    },
+    {
+      "scenario": "phase2_s2_last_seat_before",
+      "users": 200,
+      "seconds": 45,
+      "requests": 200,
+      "failures": 0,
+      "error_pct": 0.0,
+      "rps": 160.98,
+      "avg_ms": 801.71,
+      "p50_ms": 880.0,
+      "p95_ms": 1100.0,
+      "p99_ms": 1100.0,
+      "java_cpu_avg_pct": 6.29,
+      "java_rss_max_mib": 753.46,
+      "db_check": {
+        "negative_seat_trips": 0,
+        "seat_balance_mismatches": 0,
+        "contention_trip_id": 10000,
+        "contention_available_seats": 0,
+        "contention_confirmed_seats": 40,
+        "contention_exact_40_sold": true
+      }
+    },
+    {
+      "scenario": "phase2_s3_mixed_retry_before",
+      "users": 100,
+      "seconds": 60,
+      "requests": 21231,
+      "failures": 0,
+      "error_pct": 0.0,
+      "rps": 357.88,
+      "avg_ms": 25.43,
+      "p50_ms": 20.0,
+      "p95_ms": 64.0,
+      "p99_ms": 100.0,
+      "java_cpu_avg_pct": 117.28,
+      "java_rss_max_mib": 784.07,
+      "db_check": {
+        "negative_seat_trips": 0,
+        "seat_balance_mismatches": 0,
+        "seeded_bookings": 5000,
+        "actual_new_bookings": 7211,
+        "logical_bookings_created": 6012,
+        "retries_sent": 1199,
+        "retries_replayed_header": 0,
+        "duplicate_bookings": 1199
+      }
+    }
+  ]
+}
