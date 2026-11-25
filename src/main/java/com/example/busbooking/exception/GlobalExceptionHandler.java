@@ -131,6 +131,18 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
         return reply(request, 409, "TRIP_CONFLICT", error.getMessage(), Map.of(), new HttpHeaders());
     }
 
+    @ExceptionHandler(IdempotencyInProgressException.class)
+    public ResponseEntity<Object> idempotencyInProgress(WebRequest request) {
+        return reply(request, 409, "IDEMPOTENCY_IN_PROGRESS",
+                "A request with this Idempotency-Key is still being processed", Map.of(), new HttpHeaders());
+    }
+
+    @ExceptionHandler(IdempotencyKeyMismatchException.class)
+    public ResponseEntity<Object> idempotencyKeyMismatch(WebRequest request) {
+        return reply(request, 422, "IDEMPOTENCY_KEY_PAYLOAD_MISMATCH",
+                "Idempotency-Key was already used with a different request payload", Map.of(), new HttpHeaders());
+    }
+
     @ExceptionHandler(InsufficientSeatsException.class)
     public ResponseEntity<Object> insufficientSeats(InsufficientSeatsException error, WebRequest request) {
         return reply(request, 409, "INSUFFICIENT_SEATS", error.getMessage(), Map.of(), new HttpHeaders());
